@@ -151,7 +151,7 @@ def main():
     # Sets background color of the frame and sets icon
     # TODO:  Needs to be tested with windows and mac
     root.configure(background='#324159')
-    icon_image = PhotoImage(file='Timer.png')
+    icon_image = PhotoImage(file=resource_path('Timer.png'))
     root.iconphoto(True, icon_image)
 
     # Add the buttons to the main window
