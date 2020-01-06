@@ -88,7 +88,7 @@ class ProjectTimer(Frame):
         hours = int(elp/3600)
         minutes = int((elp - hours*3600.0)/60)
         seconds = int(elp - hours*3600.0 - minutes*60.0)
-        self.timestr.set('{}:{}:{}'.format(hours, minutes, seconds))
+        self.timestr.set('{:02d}:{:02d}:{:02d}'.format(hours, minutes, seconds))
 
     @trigger_close
     def Close(self):
