@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Time_card.py'],
-             pathex=['C:\\Users\\mmarlett\\Documents\\TimeCard'],
+             pathex=['C:\\Users\\mmarlett\\Documents\\Python Scripts\\TimeCard'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -28,7 +28,8 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=False )
+          console=False,
+		  icon = 'C:\\Users\\mmarlett\\Documents\\Python Scripts\\TimeCard\\Timer.png')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
