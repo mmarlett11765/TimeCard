@@ -62,27 +62,27 @@ class ProjectTimer(Frame):
         self._running = -1
         self.timestr = StringVar()
         self.proj = StringVar(value='Project {}'.format(self._id))
+        self.topframe = Frame(self)
+        self.topframe.pack(side=TOP, expand=YES, fill=BOTH)
+        self.bottomframe = Frame(self)
+        self.bottomframe.pack(side=BOTTOM, expand=YES, fill=BOTH)
+        self.top_widgets = []
+        self.bottom_widgets = []
         self.makeWidgets()
 
     def makeWidgets(self):
-        topframe = Frame(self)
-        topframe.pack(side=TOP, expand=YES, fill=BOTH)
-        bottomframe = Frame(self)
-        bottomframe.pack(side=BOTTOM, expand=YES, fill=BOTH)
-        top_widgets = []
-        bottom_widgets = []
-        top_widgets.append(Entry(topframe, textvariable=self.proj, bg='#29323b', fg='#ebe8dd', justify='center'))
-        top_widgets.append(Button(topframe, text="X", command=self.Close, bg='#29323b', fg='#ebe8dd'))
-        bottom_widgets.append(Button(bottomframe, text='Start', command=self.Start, bg='#627eab', fg='#82ff91'))
-        bottom_widgets.append(Button(bottomframe, text='Stop', command=self.Stop, bg='#627eab', fg='#ff8b80'))
-        bottom_widgets.append(Button(bottomframe, text='Reset', command=self.Reset, bg='#627eab', fg='#ebe8dd'))
-        bottom_widgets.append(Label(bottomframe, textvariable=self.timestr, bg='#29323b', fg='#ebe8dd'))
-        for widget in top_widgets:
+        self.top_widgets.append(Entry(self.topframe, textvariable=self.proj, bg='#29323b', fg='#ebe8dd', justify='center'))
+        self.top_widgets.append(Button(self.topframe, text="X", command=self.Close, bg='#29323b', fg='#ebe8dd'))
+        self.bottom_widgets.append(Button(self.bottomframe, text='Start', command=self.Start, bg='#627eab', fg='#82ff91'))
+        self.bottom_widgets.append(Button(self.bottomframe, text='Stop', command=self.Stop, bg='#627eab', fg='#ff8b80'))
+        self.bottom_widgets.append(Button(self.bottomframe, text='Reset', command=self.Reset, bg='#627eab', fg='#ebe8dd'))
+        self.bottom_widgets.append(Label(self.bottomframe, textvariable=self.timestr, bg='#29323b', fg='#ebe8dd'))
+        for widget in self.top_widgets:
             widget.pack(side=LEFT, expand=YES, fill=BOTH)
-        for widget in bottom_widgets:
+        for widget in self.bottom_widgets:
             widget.pack(side=TOP, expand=YES, fill=BOTH)
         self._setTime(self._elapsedtime)
-        top_widgets[0].focus()
+        self.top_widgets[0].focus()
 
     def _setTime(self, elp):
         hours = int(elp/3600)
@@ -98,18 +98,21 @@ class ProjectTimer(Frame):
 
     @trigger_start
     def Start(self):
+        self.bottomframe.focus()
         if not self._running == self._id:
             self._start = time.time() - self._elapsedtime
             self._running = self._id
             self.timestr.set('Active')
 
     def Stop(self):
+        self.bottomframe.focus()
         if self._running == self._id:
             self._elapsedtime = time.time() - self._start
             self._setTime(self._elapsedtime)
             self._running = -1
 
     def Reset(self):
+        self.bottomframe.focus()
         self._start = time.time()
         self._elapsedtime = 0.0
         self._setTime(self._elapsedtime)
