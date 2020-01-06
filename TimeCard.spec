@@ -16,7 +16,8 @@ a = Analysis(['Time_card.py'],
              cipher=block_cipher,
              noarchive=False)
 
-a.datas += [('Timer.png','C:\\Users\\mmarlett\\Documents\\Python Scripts\\TimeCard\\Timer.png', "DATA")]
+a.datas += [('Timer.png','C:\\Users\\mmarlett\\Documents\\Python Scripts\\TimeCard\\Timer.png', "DATA"),
+			('timer_256x256.ico','C:\\Users\\mmarlett\\Documents\\Python Scripts\\TimeCard\\timer_256x256.ico', "DATA")]
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
@@ -29,7 +30,7 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=False,
-		  icon = 'C:\\Users\\mmarlett\\Documents\\Python Scripts\\TimeCard\\Timer.png')
+		  icon = 'C:\\Users\\mmarlett\\Documents\\Python Scripts\\TimeCard\\timer_256x256.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

@@ -1,6 +1,7 @@
 from tkinter import *
 import time
 import os
+from sys import platform
 
 frames = []
 root = Tk()
@@ -154,8 +155,12 @@ def main():
     # Sets background color of the frame and sets icon
     # TODO:  Needs to be tested with windows and mac
     root.configure(background='#324159')
-    icon_image = PhotoImage(file=resource_path('Timer.png'))
-    root.iconphoto(True, icon_image)
+    os_type = platform
+    if 'win' in os_type:
+        root.iconbitmap(resource_path('timer_256x256.ico'))
+    else:
+        icon_image = PhotoImage(file=resource_path('Timer.png'))
+        root.iconphoto(True, icon_image)
 
     # Add the buttons to the main window
     inspiration = Label(root, text='Have a good day', bg='#324159', fg='#ebe8dd').pack(side=TOP)
